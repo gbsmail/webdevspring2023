@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
 
-var margin = {top: 10, right: -10, bottom: 40, left: 180},
+var margin = {top: 10, right: -10, bottom: 40, left: 220},
     width = 460 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -32,7 +32,7 @@ console.log(data)
 var y = d3.scaleBand()
   .range([ 0, height ])
   .domain(data.map(function(d) { return d.Service; }))
-  .padding(1);
+  .padding(10);
 svg.append("g")
   .call(d3.axisLeft(y))
 
@@ -69,5 +69,23 @@ svg.selectAll("line")
 .transition()
 .duration(2000)
 .attr("x1", function(d) { return x(d.Value); })
+
+// x-axis label
+svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width + margin.right - 10)
+    .attr("y", height + margin.bottom - 10)
+    .text("% of Asians using services in NYC");
+
+// y-axis label
+svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -margin.left + 20)
+    .attr("x", -margin.top - (height / 2))
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Social Services");
 
 })

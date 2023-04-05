@@ -56,16 +56,16 @@ a {
 /*mobile devices*/
 @media (min-width: 320px) {
   html {
-      font-size: 22px;
+      font-size: 15px;
   }
   h1 {
-      font-size: 80px;
+      font-size: 50px;
   }
 }
 /*tablets*/
 @media (min-width: 768px) {
   html {
-      font-size: 28px;
+      font-size: 15px;
   }
   h1 {
       font-size: 80px;
@@ -74,7 +74,7 @@ a {
 /*laptops and desktops*/
 @media (min-width: 1024px) {
   html {
-      font-size: 32px;
+      font-size: 15px;
   }
   h1 {
       font-size: 130px;
