@@ -1,10 +1,11 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 40, left: 100},
+
+var margin = {top: 10, right: -10, bottom: 40, left: 180},
     width = 460 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#mydataviz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -13,11 +14,12 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/gbsmail/webdevspring2023/main/asamchartdata.csv", function(data) {
+console.log(data)
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 13000])
+    .domain([0, 25])
     .range([ 0, width]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -40,7 +42,7 @@ svg.selectAll("myline")
   .data(data)
   .enter()
   .append("line")
-    .attr("x1", function(d) { return x(d.Value); })
+    .attr("x1", x(0))
     .attr("x2", x(0))
     .attr("y1", function(d) { return y(d.Service); })
     .attr("y2", function(d) { return y(d.Service); })
@@ -51,9 +53,21 @@ svg.selectAll("mycircle")
   .data(data)
   .enter()
   .append("circle")
-    .attr("cx", function(d) { return x(d.Value); })
+    .attr("cx", x(0))
     .attr("cy", function(d) { return y(d.Service); })
-    .attr("r", "4")
+    .attr("r", "7")
     .style("fill", "#69b3a2")
     .attr("stroke", "black")
+
+    // Change the X coordinates of line and circle
+svg.selectAll("circle")
+.transition()
+.duration(2000)
+.attr("cx", function(d) { return x(d.Value); })
+
+svg.selectAll("line")
+.transition()
+.duration(2000)
+.attr("x1", function(d) { return x(d.Value); })
+
 })
